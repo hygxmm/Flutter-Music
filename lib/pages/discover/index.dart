@@ -26,6 +26,27 @@ class DiscoverPage extends StatelessWidget {
           ),
         ],
       ),
+      body: FutureBuilder(
+        future: getData(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              break;
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                return Text('');
+              }
+              return Text('');
+          }
+          return null;
+        },
+      ),
     );
+  }
+
+  Future getData() {
+    return '';
   }
 }
