@@ -8,11 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '防网易云音乐',
+      title: '网易云音乐',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
       home: BottomNavigationWidget(),
+      // home: LoginPage(),
     );
   }
 }
