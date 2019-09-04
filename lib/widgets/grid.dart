@@ -7,14 +7,18 @@ class NavGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.teal,
       height: ScreenUtil().setWidth(200),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          childAspectRatio: 0.75,
+        ),
+        physics: ScrollPhysics(),
         children: classify.map((item) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/rank');
+            },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,9 +27,13 @@ class NavGrid extends StatelessWidget {
                   width: ScreenUtil().setWidth(100),
                   height: ScreenUtil().setWidth(100),
                   decoration: BoxDecoration(
+                    color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(item['icon']),
+                  child: Icon(
+                    item['icon'],
+                    color: Colors.white,
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: ScreenUtil().setWidth(15)),

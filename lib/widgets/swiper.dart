@@ -9,7 +9,7 @@ class BannersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setWidth(350),
+      height: ScreenUtil().setWidth(300),
       child: Stack(
         children: <Widget>[
           Container(

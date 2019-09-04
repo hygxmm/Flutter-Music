@@ -1,3 +1,4 @@
+import 'package:Flutter_Music/common/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:Flutter_Music/pages/bottomNavigationWidget.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: BottomNavigationWidget(),
+      routes: routes,
       // home: LoginPage(),
     );
   }

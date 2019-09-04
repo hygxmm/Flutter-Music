@@ -15,6 +15,7 @@ class HttpUtil {
   HttpUtil() {
     options = BaseOptions(
       baseUrl: 'http://localhost:3000',
+      // baseUrl: 'http://39.106.151.158:3000',
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},

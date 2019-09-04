@@ -1,4 +1,6 @@
 import 'package:Flutter_Music/common/request.dart';
+import 'package:Flutter_Music/widgets/floor_list.dart';
+import 'package:Flutter_Music/widgets/floor_title.dart';
 import 'package:Flutter_Music/widgets/grid.dart';
 import 'package:Flutter_Music/widgets/swiper.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class DiscoverPage extends StatelessWidget {
       'icon': Icons.live_tv,
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,8 +82,10 @@ class DiscoverPage extends StatelessWidget {
   Future getData() async {
     List<Future> futures = [
       HttpUtil().get('/banner', data: {'type': Platform.isIOS ? 2 : 1}),
+      HttpUtil().get('/personalized'),
     ];
     var result = await Future.wait(futures);
+    print('网络接口');
     return result;
   }
 
@@ -107,16 +112,19 @@ class DiscoverPage extends StatelessWidget {
   }
 
   Widget _createListView(BuildContext context, AsyncSnapshot snapshot) {
-    print(snapshot.data);
     var data = snapshot.data;
     var bannerList = data[0]['code'] == 200 ? data[0]['banners'] : [];
+    var recomList = data[1]['code'] == 200 ? data[1]['result'] : [];
 
     return EasyRefresh(
       child: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           BannersWidget(banners: bannerList),
           NavGrid(classify: navgrid),
           Divider(height: 1),
+          FloorTitle(title: '推荐歌单'),
+          FloorList(list: recomList),
         ],
       ),
       onRefresh: getData,
