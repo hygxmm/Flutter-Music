@@ -85,25 +85,20 @@ class DiscoverPage extends StatelessWidget {
       HttpUtil().get('/personalized'),
     ];
     var result = await Future.wait(futures);
-    print('网络接口');
     return result;
   }
 
   Widget _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
-        print('还未开始网络请求');
         return Text('还未开始网络请求');
       case ConnectionState.active:
-        print('开始网络请求');
         return Text('开始网络请求');
       case ConnectionState.waiting:
-        print('请求中');
         return Center(
           child: CircularProgressIndicator(),
         );
       case ConnectionState.done:
-        print('请求完成');
         if (snapshot.hasError) return Text('Error: ${snapshot.error}');
         return _createListView(context, snapshot);
       default:
