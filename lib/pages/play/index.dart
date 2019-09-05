@@ -36,15 +36,18 @@ class _PlayPageState extends State<PlayPage> {
 
   Widget _createView(BuildContext context, AsyncSnapshot snapshot) {
     var data = snapshot.data;
-    print(data);
-    var _imgUrl = data[1][''];
+    var _songUrl = data[0]['code'] == 200 ? data[0]['data'][0]['url'] : '';
+    var _imgUrl =
+        data[1]['code'] == 200 ? data[1]['songs'][0]['al']['picUrl'] : '';
+    print(_songUrl);
+    print(_imgUrl);
 
     return Stack(
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(''),
+              image: NetworkImage('$_imgUrl'),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black45,
