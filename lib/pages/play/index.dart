@@ -1,7 +1,8 @@
-import 'dart:ui';
-
 import 'package:Flutter_Music/common/request.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PlayPage extends StatefulWidget {
   @override
@@ -11,48 +12,13 @@ class PlayPage extends StatefulWidget {
 class _PlayPageState extends State<PlayPage> {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> args = ModalRoute.of(context).settings.arguments;
-    return FutureBuilder(
-      future: getData(args['id']),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return Text('还未开始网络请求');
-          case ConnectionState.active:
-            return Text('开始网络请求');
-          case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          case ConnectionState.done:
-            if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-            return _createView(context, snapshot);
-          default:
-            return null;
-        }
-      },
-    );
-  }
-
-  Widget _createView(BuildContext context, AsyncSnapshot snapshot) {
-    var data = snapshot.data;
-    var _songUrl = data[0]['code'] == 200 ? data[0]['data'][0]['url'] : '';
-    var _imgUrl =
-        data[1]['code'] == 200 ? data[1]['songs'][0]['al']['picUrl'] : '';
-    print(_songUrl);
-    print(_imgUrl);
-
     return Stack(
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage('$_imgUrl'),
+              image: AssetImage('images/avatar.png'),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black45,
-                BlendMode.overlay,
-              ),
             ),
           ),
         ),
@@ -72,31 +38,130 @@ class _PlayPageState extends State<PlayPage> {
             ),
           ),
         ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
+        SafeArea(
+          child: Scaffold(
             backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: Text('${'data'}'),
-          ),
-          body: Stack(
-            alignment: FractionalOffset(0.5, 0.0),
-            children: <Widget>[
-              Stack(
-                alignment: FractionalOffset(0.7, 0.1),
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(),
-                  Container(),
+                  Text(
+                    '芒种 (原唱: 音阙诗听/赵方倩)',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(24),
+                    ),
+                  ),
+                  Text(
+                    '萧忆情Alex/原来是萝卜丫',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(20),
+                    ),
+                  )
                 ],
               ),
-            ],
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.share),
+                  onPressed: () {},
+                )
+              ],
+            ),
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      width: ScreenUtil().setWidth(500),
+                      height: ScreenUtil().setWidth(500),
+                      decoration: BoxDecoration(
+                        // color: Colors.tealAccent,
+                        image: DecorationImage(
+                          image: AssetImage('images/disc.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                bottomBar(),
+              ],
+            ),
           ),
         ),
       ],
     );
   }
 
-  Future getData(id) async {
+  Widget bottomBar() {
+    return Container(
+      height: ScreenUtil().setWidth(200),
+      color: Colors.blue,
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: ScreenUtil().setWidth(50),
+            padding: EdgeInsets.symmetric(
+              horizontal: ScreenUtil().setWidth(30),
+            ),
+            child: Row(
+              children: <Widget>[
+                Text('00:36'),
+                Expanded(
+                  child: Slider(
+                    value: 36,
+                    max: 221,
+                    min: 0,
+                    activeColor: Colors.grey.shade700,
+                    inactiveColor: Colors.grey.shade300,
+                    onChanged: (double val) {
+                      print(val);
+                    },
+                  ),
+                ),
+                Text('03:41'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenUtil().setWidth(30),
+              ),
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                  childAspectRatio: 0.9,
+                ),
+                physics: ScrollPhysics(),
+                children: <Widget>[
+                  InkWell(
+                    child: Icon(Icons.loop),
+                  ),
+                  InkWell(
+                    child: Icon(Icons.arrow_left),
+                  ),
+                  InkWell(
+                    child: Icon(Icons.play_circle_outline),
+                  ),
+                  InkWell(
+                    child: Icon(Icons.arrow_right),
+                  ),
+                  InkWell(
+                    child: Icon(Icons.playlist_play),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future getData({id}) async {
     List<Future> futures = [
       HttpUtil().get('/song/url', data: {'id': id}),
       HttpUtil().get('/song/detail', data: {'ids': id}),

@@ -70,6 +70,14 @@ class DiscoverPage extends StatelessWidget {
           icon: Icon(Icons.keyboard_voice),
           onPressed: () {},
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.playlist_play),
+            onPressed: () {
+              Navigator.pushNamed(context, '/play');
+            },
+          )
+        ],
         elevation: 0,
       ),
       body: FutureBuilder(
