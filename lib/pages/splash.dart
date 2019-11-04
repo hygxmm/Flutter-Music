@@ -38,6 +38,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   void navToPage() async {
     AppConfig appConfig = Provider.of<AppConfig>(context);
     if (appConfig.isLogin) {
@@ -50,6 +56,21 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
-    return Container();
+    return Scaffold(
+      // backgroundColor: Colors.redAccent,
+      body: Center(
+        child: Container(
+          width: ScreenUtil().setWidth(300),
+          height: ScreenUtil().setWidth(300),
+          child: ScaleTransition(
+            scale: animation,
+            child: Hero(
+              tag: 'logo',
+              child: Image.asset('images/logo.jpeg'),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -37,7 +37,7 @@ class HttpUtil {
     ));
   }
 
-  get(String url, {Map<String, dynamic> data = {}, options}) async {
+  get(String url, {Map<String, dynamic> data, options}) async {
     Response response;
     try {
       response = await dio.get(url, queryParameters: data, options: options);
