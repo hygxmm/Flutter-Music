@@ -2,12 +2,24 @@ import 'package:Flutter_Music/pages/discover/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BottomNavigationWidget extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _BottomNavigationWidgetState createState() => _BottomNavigationWidgetState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
+class _MainPageState extends State<MainPage> {
+  // @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
+// class BottomNavigationWidget extends StatefulWidget {
+//   @override
+//   _BottomNavigationWidgetState createState() => _BottomNavigationWidgetState();
+// }
+
+// class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   final List<BottomNavigationBarItem> tabs = [
     BottomNavigationBarItem(
       icon: Icon(Icons.music_note),

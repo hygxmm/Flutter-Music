@@ -1,5 +1,6 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:cookie_jar/cookie_jar.dart';
 
 class HttpUtil {
   static HttpUtil instance;
@@ -14,17 +15,15 @@ class HttpUtil {
 
   HttpUtil() {
     options = BaseOptions(
-      baseUrl: 'http://localhost:3000',
-      // baseUrl: 'http://39.106.151.158:3000',
-      connectTimeout: 10000,
-      receiveTimeout: 5000,
-      headers: {},
-      contentType: ContentType.parse("application/x-www-form-urlencoded"),
-      responseType: ResponseType.json,
+      baseUrl: 'http://www.liuhuan.online:3000/',
+      connectTimeout: 5000,
+      receiveTimeout: 3000,
     );
 
     dio = Dio(options);
 
+    dio.interceptors.add(CookieManager(CookieJar()));
+    dio.interceptors.add(LogInterceptor());
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options) {
         return options;
@@ -38,7 +37,7 @@ class HttpUtil {
     ));
   }
 
-  get(url, {data, options}) async {
+  get(String url, {Map<String, dynamic> data = {}, options}) async {
     Response response;
     try {
       response = await dio.get(url, queryParameters: data, options: options);
