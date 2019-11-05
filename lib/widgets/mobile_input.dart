@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MobileInput extends StatelessWidget {
+  const MobileInput({
+    Key key,
+    this.controller,
+  }) : super(key: key);
   final TextEditingController controller;
-  MobileInput(this.controller);
   @override
   Widget build(BuildContext context) {
     return Container(

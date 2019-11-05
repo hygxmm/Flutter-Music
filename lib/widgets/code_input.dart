@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:Flutter_Music/common/request.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CodeInput extends StatelessWidget {
-  final TextEditingController codeCtrl;
-  final TextEditingController mobileCtrl;
-  CodeInput(this.codeCtrl, this.mobileCtrl);
+class CodeInput extends StatefulWidget {
+  const CodeInput({
+    Key key,
+    this.controller,
+    this.getCode,
+  }) : super(key: key);
+  final TextEditingController controller;
+  final Function getCode;
+
+  @override
+  _CodeInputState createState() => _CodeInputState();
+}
+
+class _CodeInputState extends State<CodeInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil().setWidth(600),
       child: TextField(
-        controller: codeCtrl,
+        controller: widget.controller,
         maxLength: 4,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white24,
-          hintText: '请输入验证码',
+          hintText: '验证码',
           counterText: '',
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          prefixIcon: Icon(Icons.drafts),
-          suffixIcon: InkWell(
-            child: Container(
-              width: ScreenUtil().setWidth(200),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.white60,
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Text(
-                '获取验证码',
-                style: TextStyle(color: Theme.of(context).accentColor),
+          prefixIcon: Icon(Icons.lock_outline),
+          suffixIcon: FlatButton(
+            child: Text(
+              '获取验证码',
+              style: TextStyle(
+                color: Colors.green,
               ),
             ),
-            onTap: _getCode,
+            onPressed: () {
+              print("获取验证码");
+              widget.getCode();
+            },
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
@@ -43,12 +49,5 @@ class CodeInput extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _getCode() async {
-    print(mobileCtrl.text);
-    var response = await HttpUtil()
-        .post('user/sendSms', data: {'mobile': mobileCtrl.text});
-    print(response.data);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:Flutter_Music/common/request.dart';
-import 'package:Flutter_Music/widgets/floor_title.dart';
+// import 'package:Flutter_Music/widgets/floor_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,7 +49,7 @@ class SongRank extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            FloorTitle(title: '官方榜'),
+            // FloorTitle(title: '官方榜'),
             Container(
               child: ListView(
                 shrinkWrap: true,

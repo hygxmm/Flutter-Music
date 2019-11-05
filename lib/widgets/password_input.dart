@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PassWordInput extends StatelessWidget {
+class PasswordInput extends StatelessWidget {
+  const PasswordInput({
+    Key key,
+    this.controller,
+  }) : super(key: key);
   final TextEditingController controller;
-  PassWordInput(this.controller);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,6 +26,12 @@ class PassWordInput extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide.none,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.remove_red_eye),
+            onPressed: () {
+              print("切换小眼睛");
+            },
           ),
         ),
       ),

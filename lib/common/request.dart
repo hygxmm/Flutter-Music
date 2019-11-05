@@ -48,7 +48,7 @@ class HttpUtil {
     return response.data;
   }
 
-  post(url, {data, options}) async {
+  post(String url, {Map<String, dynamic> data, options}) async {
     Response response;
     try {
       response = await dio.post(url, data: data, options: options);

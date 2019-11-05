@@ -1,8 +1,8 @@
 import 'package:Flutter_Music/common/request.dart';
-import 'package:Flutter_Music/widgets/floor_list.dart';
-import 'package:Flutter_Music/widgets/floor_title.dart';
-import 'package:Flutter_Music/widgets/grid.dart';
-import 'package:Flutter_Music/widgets/swiper.dart';
+// import 'package:Flutter_Music/widgets/floor_list.dart';
+// import 'package:Flutter_Music/widgets/floor_title.dart';
+// import 'package:Flutter_Music/widgets/grid.dart';
+// import 'package:Flutter_Music/widgets/swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
@@ -123,11 +123,11 @@ class DiscoverPage extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
-          BannersWidget(banners: bannerList),
-          NavGrid(classify: navgrid),
-          Divider(height: 1),
-          FloorTitle(title: '推荐歌单'),
-          FloorList(list: recomList),
+          // BannersWidget(banners: bannerList),
+          // NavGrid(classify: navgrid),
+          // Divider(height: 1),
+          // FloorTitle(title: '推荐歌单'),
+          // FloorList(list: recomList),
         ],
       ),
       onRefresh: getData,
