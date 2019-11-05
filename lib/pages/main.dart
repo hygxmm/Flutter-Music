@@ -1,6 +1,5 @@
-import 'package:Flutter_Music/pages/discover/index.dart';
+import 'package:Flutter_Music/pages/discover.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -8,18 +7,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  // @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-// class BottomNavigationWidget extends StatefulWidget {
-//   @override
-//   _BottomNavigationWidgetState createState() => _BottomNavigationWidgetState();
-// }
-
-// class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   final List<BottomNavigationBarItem> tabs = [
     BottomNavigationBarItem(
       icon: Icon(Icons.music_note),
@@ -30,15 +17,15 @@ class _MainPageState extends State<MainPage> {
       title: Text('视频'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.music_video),
+      icon: Icon(Icons.queue_music),
       title: Text('我的'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      title: Text('我的'),
+      icon: Icon(Icons.people_outline),
+      title: Text('云村'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.people),
+      icon: Icon(Icons.person_outline),
       title: Text('账号'),
     ),
   ];
@@ -48,9 +35,8 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 245, 245, 0.9),
+      // backgroundColor: Color.fromRGBO(245, 245, 245, 0.9),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
