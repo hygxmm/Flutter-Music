@@ -6,11 +6,11 @@ class Routes {
   static String root = '/';
   static String login = '/login';
   static String main = '/main';
+  static String recommend = '/recommend';
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-        print('router was not found!!!');
         return Scaffold(
           body: Center(
             child: Text('404'),
@@ -22,5 +22,6 @@ class Routes {
     router.define(root, handler: splashHandler);
     router.define(login, handler: loginHandler);
     router.define(main, handler: mainHandler);
+    router.define(recommend, handler: recommendHandler);
   }
 }

@@ -1,21 +1,19 @@
 import 'package:Flutter_Music/common/request.dart';
-// import 'package:Flutter_Music/widgets/floor_list.dart';
-// import 'package:Flutter_Music/widgets/floor_title.dart';
-// import 'package:Flutter_Music/widgets/grid.dart';
-// import 'package:Flutter_Music/widgets/swiper.dart';
+import 'package:Flutter_Music/widgets/banner_swiper.dart';
+import 'package:Flutter_Music/widgets/grid_list.dart';
+import 'package:Flutter_Music/widgets/navigator_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/phoenix_header.dart';
-import 'package:flutter_easyrefresh/phoenix_footer.dart';
 
 class DiscoverPage extends StatelessWidget {
   final String realkeyword = '隔壁老樊';
-  final List<Map> navgrid = [
+  final List<Map<String, dynamic>> navgrid = [
     {
       'text': '每日推荐',
       'icon': Icons.calendar_today,
+      'path': '/recommend',
     },
     {
       'text': '歌单',
@@ -87,15 +85,6 @@ class DiscoverPage extends StatelessWidget {
     );
   }
 
-  Future getData() async {
-    List<Future> futures = [
-      HttpUtil().get('/banner', data: {'type': Platform.isIOS ? 2 : 1}),
-      HttpUtil().get('/personalized'),
-    ];
-    var result = await Future.wait(futures);
-    return result;
-  }
-
   Widget _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
@@ -118,22 +107,30 @@ class DiscoverPage extends StatelessWidget {
     var data = snapshot.data;
     var bannerList = data[0]['code'] == 200 ? data[0]['banners'] : [];
     var recomList = data[1]['code'] == 200 ? data[1]['result'] : [];
+    var newSongs = data[2]['code'] == 200 ? data[2]['albums'] : [];
 
     return EasyRefresh(
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
-          // BannersWidget(banners: bannerList),
-          // NavGrid(classify: navgrid),
-          // Divider(height: 1),
-          // FloorTitle(title: '推荐歌单'),
-          // FloorList(list: recomList),
+          BannerSwiperWidget(banners: bannerList),
+          NavigatorGrid(classify: navgrid),
+          GridList(title: '推荐歌单', list: recomList),
+          GridList(title: '新碟上架', list: newSongs),
         ],
       ),
       onRefresh: getData,
       onLoad: () async {},
-      header: PhoenixHeader(),
-      footer: PhoenixFooter(),
     );
+  }
+
+  Future getData() async {
+    List<Future> futures = [
+      HttpUtil().get('/banner', data: {'type': Platform.isIOS ? 2 : 1}),
+      HttpUtil().get('/personalized', data: {'limit': 6}),
+      HttpUtil().get('/top/album', data: {'limit': 3}),
+    ];
+    var result = await Future.wait(futures);
+    return result;
   }
 }

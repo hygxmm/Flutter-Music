@@ -1,4 +1,4 @@
-import 'package:Flutter_Music/pages/discover/index.dart';
+import 'package:Flutter_Music/pages/discover.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,18 +8,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  // @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-// class BottomNavigationWidget extends StatefulWidget {
-//   @override
-//   _BottomNavigationWidgetState createState() => _BottomNavigationWidgetState();
-// }
-
-// class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   final List<BottomNavigationBarItem> tabs = [
     BottomNavigationBarItem(
       icon: Icon(Icons.music_note),
@@ -43,6 +31,10 @@ class _MainPageState extends State<MainPage> {
     ),
   ];
   final List<Widget> views = [
+    DiscoverPage(),
+    DiscoverPage(),
+    DiscoverPage(),
+    DiscoverPage(),
     DiscoverPage(),
   ];
   int currentIndex = 0;

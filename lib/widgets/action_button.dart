@@ -23,14 +23,14 @@ class ActionButton extends StatelessWidget {
             ? Text(
                 '$title',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.red,
                   fontSize: ScreenUtil().setSp(36),
                 ),
               )
             : CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
-        color: Theme.of(context).accentColor,
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),

@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:Flutter_Music/common/request.dart';
 import 'package:Flutter_Music/router/application.dart';
 import 'package:Flutter_Music/widgets/action_button.dart';
 import 'package:Flutter_Music/widgets/empty_widget.dart';
@@ -8,7 +5,6 @@ import 'package:Flutter_Music/widgets/mobile_input.dart';
 import 'package:Flutter_Music/widgets/password_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:oktoast/oktoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -84,7 +80,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[200],
+      backgroundColor: Color(0xFFe70012),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -94,8 +90,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   tag: 'logo',
                   child: Image.asset(
                     'images/logo.jpeg',
-                    width: ScreenUtil().setWidth(100),
-                    height: ScreenUtil().setWidth(100),
+                    width: ScreenUtil().setWidth(200),
+                    height: ScreenUtil().setWidth(200),
                   ),
                 ),
               ),

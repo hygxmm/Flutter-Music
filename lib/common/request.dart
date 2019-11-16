@@ -20,21 +20,20 @@ class HttpUtil {
       receiveTimeout: 3000,
     );
 
-    dio = Dio(options);
-
-    dio.interceptors.add(CookieManager(CookieJar()));
-    dio.interceptors.add(LogInterceptor());
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (RequestOptions options) {
-        return options;
-      },
-      onResponse: (Response response) {
-        return response;
-      },
-      onError: (DioError e) {
-        return e;
-      },
-    ));
+    dio = Dio(options)
+      ..interceptors.add(CookieManager(CookieJar()))
+      ..interceptors.add(LogInterceptor())
+      ..interceptors.add(InterceptorsWrapper(
+        onRequest: (RequestOptions options) {
+          return options;
+        },
+        onResponse: (Response response) {
+          return response;
+        },
+        onError: (DioError e) {
+          return e;
+        },
+      ));
   }
 
   get(String url, {Map<String, dynamic> data, options}) async {
