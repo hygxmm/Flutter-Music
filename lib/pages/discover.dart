@@ -131,6 +131,7 @@ class DiscoverPage extends StatelessWidget {
       HttpUtil().get('/top/album', data: {'limit': 3}),
     ];
     var result = await Future.wait(futures);
+    print("发现页请求数据");
     return result;
   }
 }

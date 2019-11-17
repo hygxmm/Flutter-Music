@@ -1,3 +1,4 @@
+import 'package:Flutter_Music/common/request.dart';
 import 'package:Flutter_Music/router/application.dart';
 import 'package:Flutter_Music/widgets/action_button.dart';
 import 'package:Flutter_Music/widgets/empty_widget.dart';
@@ -5,6 +6,7 @@ import 'package:Flutter_Music/widgets/mobile_input.dart';
 import 'package:Flutter_Music/widgets/password_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oktoast/oktoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,6 +27,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 700),
@@ -68,6 +71,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     loginController.addListener(() {
       setState(() {});
     });
+    mobileController.text = '15838225813';
+    pwdController.text = '258123mm';
   }
 
   @override
@@ -129,25 +134,26 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   void _login() {
     var _mobile = mobileController.text;
-    // if (_mobile == "") {
-    //   showToast('请填写手机号');
-    //   return;
-    // }
+    if (_mobile == "") {
+      showToast('请填写手机号');
+      return;
+    }
     var _password = pwdController.text;
-    // if (_password == "") {
-    //   showToast('请填写密码');
-    //   return;
-    // }
+    if (_password == "") {
+      showToast('请填写密码');
+      return;
+    }
     loginController.forward();
-    Future.delayed(Duration(milliseconds: 2000), () {
+    // Future.delayed(Duration(milliseconds: 2000), () {
+    //   Application.router.navigateTo(context, '/main');
+    // });
+
+    HttpUtil().post(
+      '/login/cellphone',
+      data: {'phone': _mobile, 'password': _password},
+    ).then((res) {
+      print(res);
       Application.router.navigateTo(context, '/main');
     });
-
-    // HttpUtil().post(
-    //   '/login/cellphone',
-    //   data: {'phone': _mobile, 'password': _password},
-    // ).then((res){
-
-    // });
   }
 }

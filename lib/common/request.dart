@@ -22,7 +22,7 @@ class HttpUtil {
 
     dio = Dio(options)
       ..interceptors.add(CookieManager(CookieJar()))
-      ..interceptors.add(LogInterceptor())
+      // ..interceptors.add(LogInterceptor())
       ..interceptors.add(InterceptorsWrapper(
         onRequest: (RequestOptions options) {
           return options;

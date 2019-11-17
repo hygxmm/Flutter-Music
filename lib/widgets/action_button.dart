@@ -28,7 +28,7 @@ class ActionButton extends StatelessWidget {
                 ),
               )
             : CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
               ),
         color: Colors.white,
         shape: RoundedRectangleBorder(
