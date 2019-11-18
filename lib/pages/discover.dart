@@ -22,6 +22,7 @@ class DiscoverPage extends StatelessWidget {
     {
       'text': '排行榜',
       'icon': Icons.filter_list,
+      'path': '/rank',
     },
     {
       'text': '电台',

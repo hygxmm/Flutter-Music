@@ -1,5 +1,6 @@
 import 'package:Flutter_Music/pages/login.dart';
 import 'package:Flutter_Music/pages/main.dart';
+import 'package:Flutter_Music/pages/rank.dart';
 import 'package:Flutter_Music/pages/recommend.dart';
 import 'package:Flutter_Music/pages/splash.dart';
 import 'package:flutter/material.dart';
@@ -30,5 +31,12 @@ var mainHandler = Handler(
 var recommendHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<Object>> params) {
     return RecommendPage();
+  },
+);
+
+// 排行榜
+var rankHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<Object>> params) {
+    return RankPage();
   },
 );

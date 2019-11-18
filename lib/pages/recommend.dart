@@ -55,7 +55,9 @@ class _RecommendPageState extends State<RecommendPage> {
                 child: Container(
                   color: Colors.white,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      playSongs(0);
+                    },
                     child: SizedBox.fromSize(
                       size: Size.fromHeight(ScreenUtil().setWidth(100)),
                       child: Container(
@@ -117,6 +119,9 @@ class _RecommendPageState extends State<RecommendPage> {
               (BuildContext context, int index) {
                 return GestureDetector(
                   behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    playSongs(index);
+                  },
                   child: Container(
                     width: ScreenUtil().setWidth(750),
                     height: ScreenUtil().setWidth(120),
@@ -199,4 +204,6 @@ class _RecommendPageState extends State<RecommendPage> {
       });
     }
   }
+
+  void playSongs(int index) {}
 }

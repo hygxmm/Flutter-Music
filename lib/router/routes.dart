@@ -7,6 +7,7 @@ class Routes {
   static String login = '/login';
   static String main = '/main';
   static String recommend = '/recommend';
+  static String rank = '/rank';
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
@@ -22,6 +23,11 @@ class Routes {
     router.define(root, handler: splashHandler);
     router.define(login, handler: loginHandler);
     router.define(main, handler: mainHandler);
-    router.define(recommend, handler: recommendHandler);
+    router.define(
+      recommend,
+      handler: recommendHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(rank, handler: rankHandler);
   }
 }
