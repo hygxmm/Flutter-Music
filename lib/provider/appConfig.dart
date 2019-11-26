@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppConfig with ChangeNotifier {
   //state
   int _themeIndex = 0;
-  bool _isLogin = false;
+  bool _isLogin = true;
 
   //getter
   int get themeIndex => _themeIndex;

@@ -28,6 +28,10 @@ class Routes {
       handler: recommendHandler,
       transitionType: TransitionType.cupertino,
     );
-    router.define(rank, handler: rankHandler);
+    router.define(
+      rank,
+      handler: rankHandler,
+      transitionType: TransitionType.cupertino,
+    );
   }
 }

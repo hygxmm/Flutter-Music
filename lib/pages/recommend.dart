@@ -195,8 +195,9 @@ class _RecommendPageState extends State<RecommendPage> {
   }
 
   void getData() async {
-    var result = await HttpUtil().get('/recommend/songs');
     print('每日推荐请求数据');
+
+    var result = await HttpUtil().get('/recommend/songs');
     if (result['code'] == 200) {
       var datas = result['recommend'];
       setState(() {

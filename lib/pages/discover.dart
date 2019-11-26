@@ -126,13 +126,14 @@ class DiscoverPage extends StatelessWidget {
   }
 
   Future getData() async {
+    print("发现页请求数据");
     List<Future> futures = [
       HttpUtil().get('/banner', data: {'type': Platform.isIOS ? 2 : 1}),
       HttpUtil().get('/personalized', data: {'limit': 6}),
       HttpUtil().get('/top/album', data: {'limit': 3}),
     ];
     var result = await Future.wait(futures);
-    print("发现页请求数据");
+
     return result;
   }
 }

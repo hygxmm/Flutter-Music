@@ -25,6 +25,15 @@ class RankPage extends StatelessWidget {
             case ConnectionState.done:
               if (snapshot.hasError) return Text('Error: ${snapshot.error}');
               var data = snapshot.data;
+              var officialTopListData = data['list']
+                  .where((l) => l['tracks'].isNotEmpty)
+                  .toList(); // 官方榜的数据
+              var moreTopListData = data['list']
+                  .where((l) => l['tracks'].isEmpty)
+                  .toList(); // 更多榜单的数据
+              print(officialTopListData.length);
+              print(moreTopListData.length);
+
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,6 +45,7 @@ class RankPage extends StatelessWidget {
                         top: ScreenUtil().setWidth(40),
                         left: ScreenUtil().setWidth(40),
                       ),
+                      itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index == 0) {
                           return Text(
@@ -46,8 +56,11 @@ class RankPage extends StatelessWidget {
                             ),
                           );
                         } else {
-                          
+                          return GestureDetector();
                         }
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Container();
                       },
                     ),
                   ],
@@ -62,8 +75,9 @@ class RankPage extends StatelessWidget {
   }
 
   Future getData() async {
-    var result = await HttpUtil().get('/');
+    var result = await HttpUtil().get('toplist/detail');
     print('请求排行榜数据');
+    print(result);
     return result;
   }
 }
