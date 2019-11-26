@@ -36,6 +36,7 @@ class RankPage extends StatelessWidget {
                         top: ScreenUtil().setWidth(40),
                         left: ScreenUtil().setWidth(40),
                       ),
+                      itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index == 0) {
                           return Text(
@@ -46,8 +47,11 @@ class RankPage extends StatelessWidget {
                             ),
                           );
                         } else {
-                          
+                          return Container();
                         }
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Container();
                       },
                     ),
                   ],
